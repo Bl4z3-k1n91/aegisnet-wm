@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.730709+00:00",
+  "artifact": "genis-open-world-v1",
+  "file_count": 6,
+  "directory_sha256": "2791410544c558a6e0924b641d7f7596e8d946b130635553f25257e167581e7e",
+  "files": {
+    "attack_h1.joblib": {
+      "sha256": "46da500d3bb7a91adcbd0fc507a3dcabe75db7617cfede699c548c0e10394064",
+      "size": 482960
+    },
+    "attack_h3.joblib": {
+      "sha256": "764b006fd47e902e383d8a6fda273f24de97ac911b8a4b1543287dc434d819b3",
+      "size": 721568
+    },
+    "attack_h6.joblib": {
+      "sha256": "75f1bc2f631794cdd063facd936dba5c0ebb8a2dfbfeded4f9dcaae9fdfeaa64",
+      "size": 536640
+    },
+    "calibration.json": {
+      "sha256": "c87d6f7d4d8af959c5f6f9a42cf956412220139fffa667a7cbe78aa473a46c50",
+      "size": 352
+    },
+    "metadata.json": {
+      "sha256": "aaf2ffc8e3f0a9838246314995cdfce26ba375bf93687ca20600e1a58afba58c",
+      "size": 1200
+    },
+    "metrics.json": {
+      "sha256": "7dd4ec6067967729f6f315fd3d344b7d4138d4e8491450bde644ec8a84b67fc8",
+      "size": 2203
+    }
+  }
+}

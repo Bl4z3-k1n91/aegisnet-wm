@@ -1,0 +1,39 @@
+{
+  "validation_operating_point": {
+    "threshold": 0.4,
+    "coverage": 1.0,
+    "retained_accuracy": 0.919760279673714,
+    "attack_recall": 0.4881516587677725,
+    "benign_fpr": 0.0003721622627465575,
+    "benign_samples": 5374,
+    "attack_samples": 633,
+    "abstained": 0,
+    "exact_accuracy_without_abstention": 0.919760279673714,
+    "macro_f1_without_abstention": 0.5575508945822851
+  },
+  "local_eve_test": {
+    "threshold": 0.4,
+    "coverage": 1.0,
+    "retained_accuracy": 1.0,
+    "attack_recall": 1.0,
+    "benign_fpr": 0.0,
+    "benign_samples": 20,
+    "attack_samples": 12,
+    "abstained": 0,
+    "exact_accuracy_without_abstention": 1.0,
+    "macro_f1_without_abstention": 1.0
+  },
+  "public_genis_test": {
+    "threshold": 0.4,
+    "coverage": 0.9996720773897361,
+    "retained_accuracy": 0.9599803181892734,
+    "attack_recall": 0.9446640316205533,
+    "benign_fpr": 0.00034211426616489907,
+    "benign_samples": 5846,
+    "attack_samples": 253,
+    "abstained": 2,
+    "exact_accuracy_without_abstention": 0.9596655189375307,
+    "macro_f1_without_abstention": 0.3558049307152178
+  },
+  "promotion_eligible": false
+}

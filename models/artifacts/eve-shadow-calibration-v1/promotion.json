@@ -1,0 +1,37 @@
+{
+  "eligible": false,
+  "alert_authority": false,
+  "reason": "one or more local-domain validation gates failed; remain shadow-only",
+  "gates": {
+    "10": {
+      "eligible": false,
+      "requirements": {
+        "min_test_positive_samples": 10,
+        "min_test_negative_samples": 100,
+        "max_test_fpr": 0.01,
+        "min_test_recall": 0.8,
+        "max_raw_false_alerts_per_hour": 1.0
+      }
+    },
+    "30": {
+      "eligible": false,
+      "requirements": {
+        "min_test_positive_samples": 10,
+        "min_test_negative_samples": 100,
+        "max_test_fpr": 0.01,
+        "min_test_recall": 0.8,
+        "max_raw_false_alerts_per_hour": 1.0
+      }
+    },
+    "60": {
+      "eligible": false,
+      "requirements": {
+        "min_test_positive_samples": 10,
+        "min_test_negative_samples": 100,
+        "max_test_fpr": 0.01,
+        "min_test_recall": 0.8,
+        "max_raw_false_alerts_per_hour": 1.0
+      }
+    }
+  }
+}

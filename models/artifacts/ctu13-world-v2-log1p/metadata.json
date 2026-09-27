@@ -1,0 +1,91 @@
+{
+  "model_release": "ctu13-world-v2-log1p",
+  "evidence_status": "real_public_dataset",
+  "data_release": "ctu13-temporal-v1",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "classes": [
+    "BENIGN",
+    "RECONNAISSANCE",
+    "INITIAL_ACCESS_PATTERN",
+    "LATERAL_MOVEMENT",
+    "C2_BEACON_PATTERN",
+    "EXFILTRATION_LIKE",
+    "DDOS_LOW",
+    "DDOS_MEDIUM",
+    "DDOS_HIGH"
+  ],
+  "victims": [
+    "NONE",
+    "BR1",
+    "BR2",
+    "HUB",
+    "DC",
+    "MULTI"
+  ],
+  "history_steps": 6,
+  "window_seconds": 10,
+  "horizons_steps": [
+    1,
+    3,
+    6
+  ],
+  "horizons_seconds": [
+    10,
+    30,
+    60
+  ],
+  "latent_dim": 64,
+  "device_trained": "cpu",
+  "seed": 42,
+  "feature_transform": "log1p",
+  "class_counts_train": {
+    "BENIGN": 81903,
+    "C2_BEACON_PATTERN": 35535
+  },
+  "class_weights_train": {
+    "BENIGN": 0.6051703691482544,
+    "C2_BEACON_PATTERN": 1.3948296308517456
+  },
+  "attack_pos_weight": 2.304854368932039,
+  "change_pos_weight": 14.687683676195565,
+  "onset_pos_weight": 30.300106609808104,
+  "infiltration_pos_weight": 2.304854368932039,
+  "delta_encoding": true,
+  "transition_sampler": {
+    "transition_sequence_weight": 6.0,
+    "onset_sequence_weight": 3.0,
+    "transition_sequences": 5023,
+    "onset_sequences": 2967
+  },
+  "victim_supervision": "generic only: NONE for benign, MULTI for attack; CTU hosts are not mapped into the EVE topology"
+}

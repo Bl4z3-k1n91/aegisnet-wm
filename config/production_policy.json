@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "current_detector_artifact": "models/artifacts/aegis-current-v3-stage",
+  "current_detector_authority_enabled": false,
+  "binary_detector_challenger": "models/artifacts/aegis-binary-v3-challenger",
+  "stage_detector_challenger": "models/artifacts/aegis-current-v3-stage",
+  "model_registry": "config/model_registry.json",
+  "world_model_artifact": "models/artifacts/genis-world-v1",
+  "world_model_allowed_evidence": [
+    "real_public_dataset",
+    "real_local_eve",
+    "real_hybrid_dataset"
+  ],
+  "require_artifact_manifests": true,
+  "telemetry": {
+    "heartbeat_max_age_seconds": 10,
+    "flow_max_age_seconds": 30,
+    "max_poll_error_fraction": 0.5
+  },
+  "decision_hysteresis": {
+    "alert_confirm_windows": 2,
+    "clear_confirm_windows": 3,
+    "minimum_alert_confidence": 0.6
+  },
+  "ood": {
+    "profile": "models/artifacts/eve-ood-profile-v1.json",
+    "profile_sha256": "b1281e280c17de48628b9b70b3dd263eaa5ed9d415a1dd1dcb6bc0f2be66d8a4",
+    "max_feature_outside_fraction": 0.25,
+    "max_robust_z": 15.0,
+    "minimum_profile_rows": 100
+  },
+  "advisory": {
+    "minimum_history_fill_ratio": 1.0,
+    "require_telemetry_healthy": true,
+    "require_in_domain": true
+  }
+}

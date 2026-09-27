@@ -1,0 +1,17 @@
+{
+  "1": {
+    "threshold": 0.375,
+    "coverage": 0.853448275862069,
+    "retained_accuracy": 0.8005050505050505
+  },
+  "3": {
+    "threshold": 0.5,
+    "coverage": 0.7629310344827587,
+    "retained_accuracy": 0.8135593220338984
+  },
+  "6": {
+    "threshold": 0.55,
+    "coverage": 0.6530172413793104,
+    "retained_accuracy": 0.801980198019802
+  }
+}

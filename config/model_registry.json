@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-26T17:50:00+00:00",
+  "current_state": {
+    "legacy_stage_detector": {
+      "artifact": "models/artifacts/ntro-clean-traffic-v1",
+      "status": "RESTRICTED_PROTOTYPE",
+      "alert_authority": false,
+      "reason": "trained on 21 prototype rows; insufficient run-disjoint production evidence"
+    },
+    "multiclass_challenger": {
+      "artifact": "models/artifacts/aegis-current-v3-stage",
+      "status": "ADVISORY_CHAMPION",
+      "alert_authority": false,
+      "reason": "broader real EVE + GeNIS stage model; 98.1% local held-out accuracy, stage output remains advisory"
+    },
+    "binary_challenger": {
+      "artifact": "models/artifacts/aegis-binary-v3-challenger",
+      "status": "CHALLENGER_PENDING_LOCAL_ACCEPTANCE",
+      "alert_authority": false,
+      "reason": "local test: 100% raw recall; two-window confirmation 0 false alert episodes and 100% phase detection, but independent attack-window count is below final gate"
+    }
+  },
+  "forecasting": {
+    "champion": {
+      "artifact": "models/artifacts/genis-world-v1",
+      "status": "ADVISORY_CHAMPION",
+      "alert_authority": false,
+      "reason": "real public-data world model; locally gated by EVE calibration and OOD"
+    },
+    "hybrid_v2": {
+      "artifact": "models/artifacts/aegis-world-v2-challenger",
+      "status": "REJECTED",
+      "alert_authority": false,
+      "reason": "failed untouched EVE acceptance: high benign FPR and poor attack discrimination"
+    }
+  }
+}

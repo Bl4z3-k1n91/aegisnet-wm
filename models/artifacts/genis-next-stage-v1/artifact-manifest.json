@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.816922+00:00",
+  "artifact": "genis-next-stage-v1",
+  "file_count": 3,
+  "directory_sha256": "34d58e48910d122d94ab48b989372e76080990bf48675f55e7f8541fc51b20ec",
+  "files": {
+    "metadata.json": {
+      "sha256": "5a62380fda21238edc16030d829641b126fdf7f048492ae0a70063ba1789dfef",
+      "size": 1087
+    },
+    "metrics.json": {
+      "sha256": "c9e7a5c06078d43665bf5d8815a5ab6996cbf65ab7c25b23d41123829b6e86ed",
+      "size": 498
+    },
+    "next_stage.joblib": {
+      "sha256": "a5f7f8ffe46c9b741451dfce349e277e4b1a9ccb170215d7577afbbd364036f1",
+      "size": 430824
+    }
+  }
+}

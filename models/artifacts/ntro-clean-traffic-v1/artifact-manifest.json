@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.694015+00:00",
+  "artifact": "ntro-clean-traffic-v1",
+  "file_count": 4,
+  "directory_sha256": "e312bd3fc889d047adcbded3079484743314141e57cd925f610176f2735c2978",
+  "files": {
+    "cv_predictions.csv": {
+      "sha256": "9c7ae9f3a7f328b9c2f1f07da64d709e25beb6cabbe0c0a5b9e06a3f70e45c28",
+      "size": 1165
+    },
+    "logistic_pipeline.joblib": {
+      "sha256": "43680c50ba51c25b05afb88988849ce9ff6cb12e66a4040dfa9d71f856831d08",
+      "size": 5121
+    },
+    "metrics.json": {
+      "sha256": "9d8fa7bc992ac782d6bf1c570cd590ae14c156d41b71db81f972c83eb456081b",
+      "size": 21180
+    },
+    "random_forest_pipeline.joblib": {
+      "sha256": "e645df39587e2349b9ed3ef4aa207dc3744ebc22cecf9beec5acb1211f655b4d",
+      "size": 1353050
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "10": {
+    "threshold": 0.5500362653627925,
+    "validation_recall": 0.5,
+    "validation_fpr": 0.0,
+    "validation_precision": 1.0,
+    "met_fpr_target": true,
+    "watch_threshold": 0.5302876683416469,
+    "watch_validation_recall": 1.0,
+    "watch_validation_fpr": 0.125,
+    "watch_validation_precision": 0.9230769230769231,
+    "watch_met_fpr_target": true,
+    "watch_max_fpr": 0.15
+  },
+  "30": {
+    "threshold": 0.5772794439115136,
+    "validation_recall": 0.3,
+    "validation_fpr": 0.0,
+    "validation_precision": 1.0,
+    "met_fpr_target": true,
+    "watch_threshold": 0.5752956408676652,
+    "watch_validation_recall": 0.7,
+    "watch_validation_fpr": 0.1,
+    "watch_validation_precision": 0.875,
+    "watch_met_fpr_target": true,
+    "watch_max_fpr": 0.15
+  },
+  "60": {
+    "threshold": 0.6745233514952409,
+    "validation_recall": 0.7142857142857143,
+    "validation_fpr": 0.0,
+    "validation_precision": 1.0,
+    "met_fpr_target": true,
+    "watch_threshold": 0.6745233514952409,
+    "watch_validation_recall": 0.7142857142857143,
+    "watch_validation_fpr": 0.0,
+    "watch_validation_precision": 1.0,
+    "watch_met_fpr_target": true,
+    "watch_max_fpr": 0.15
+  }
+}

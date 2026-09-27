@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<lab name="Air-Gapped Predictive Copilot" id="e655071b-0762-507a-be70-04376c78e54b" version="1" scripttimeout="600" lock="0">
+  <description>Dual-transport MPLS and Internet DMVPN Phase 3 lab for predictive NOC analytics</description>
+  <body>Dual DMVPN Phase 3 clouds over MPLS L3VPN and simulated Internet. Generated from the Air-Gapped Predictive Copilot workspace.</body>
+  <topology>
+    <nodes>
+      <node id="1" name="P1" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="440" top="184">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="2" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="4" />
+      </node>
+      <node id="2" name="P2" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="440" top="415">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="3" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="5" />
+      </node>
+      <node id="3" name="PE1" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="307" top="300">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="2" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="3" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="6" />
+        <interface id="64" name="fa4/0" type="ethernet" network_id="8" />
+      </node>
+      <node id="4" name="PE2" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="573" top="300">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="4" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="5" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="9" />
+        <interface id="64" name="fa4/0" type="ethernet" network_id="10" />
+      </node>
+      <node id="5" name="INET" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="440" top="584">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="11" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="13" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="14" />
+        <interface id="64" name="fa4/0" type="ethernet" network_id="15" />
+      </node>
+      <node id="6" name="HUB" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="143" top="154">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="6" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="11" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="18" />
+      </node>
+      <node id="7" name="BR1" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="143" top="445">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="7" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="12" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="16" />
+      </node>
+      <node id="8" name="BR2" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="758" top="445">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="9" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="14" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="17" />
+      </node>
+      <node id="9" name="DC" type="dynamips" template="c7200" image="c7200-adventerprisek9-mz.152-4.S7.image" idlepc="0x62f21000" nvram="1024" ram="512" console="" delay="0" icon="Router.png" config="0" left="758" top="154">
+        <slot id="1" module="PA-FE-TX" />
+        <slot id="2" module="PA-FE-TX" />
+        <slot id="3" module="PA-FE-TX" />
+        <slot id="4" module="PA-FE-TX" />
+        <interface id="0" name="fa0/0" type="ethernet" network_id="1" />
+        <interface id="16" name="fa1/0" type="ethernet" network_id="10" />
+        <interface id="32" name="fa2/0" type="ethernet" network_id="15" />
+        <interface id="48" name="fa3/0" type="ethernet" network_id="19" />
+      </node>
+      <node id="10" name="NETEM-BR1-MPLS" type="qemu" template="linux" image="linux-netem" console="telnet" cpu="1" cpulimit="1" ram="256" ethernet="2" uuid="25094304-664d-53b2-85fb-e7667bb62aab" firstmac="00:50:00:00:0a:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="225" top="369">
+        <interface id="0" name="e0" type="ethernet" network_id="7" />
+        <interface id="1" name="e1" type="ethernet" network_id="8" />
+      </node>
+      <node id="11" name="NETEM-BR1-INET" type="qemu" template="linux" image="linux-netem" console="telnet" cpu="1" cpulimit="1" ram="256" ethernet="2" uuid="802ea981-1ed7-5d30-8412-4013c8bf54d6" firstmac="00:50:00:00:0b:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="256" top="538">
+        <interface id="0" name="e0" type="ethernet" network_id="12" />
+        <interface id="1" name="e1" type="ethernet" network_id="13" />
+      </node>
+      <node id="12" name="CLIENT-BR1" type="qemu" template="linux" image="linux-tinycore-6.4" console="telnet" cpu="1" cpulimit="1" ram="128" ethernet="1" uuid="f27322ec-9031-5597-a342-f0b365e8a45f" firstmac="00:50:00:00:0c:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="41" top="445">
+        <interface id="0" name="e0" type="ethernet" network_id="16" />
+      </node>
+      <node id="13" name="CLIENT-BR2" type="qemu" template="linux" image="linux-tinycore-6.4" console="telnet" cpu="1" cpulimit="1" ram="128" ethernet="1" uuid="5b14f7da-1a4a-5948-a139-d411588db249" firstmac="00:50:00:00:0d:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="901" top="445">
+        <interface id="0" name="e0" type="ethernet" network_id="17" />
+      </node>
+      <node id="14" name="SERVICE-HUB" type="qemu" template="linux" image="linux-tinycore-6.4" console="telnet" cpu="1" cpulimit="1" ram="128" ethernet="1" uuid="41bfeedf-b049-5a5b-9068-224fcd11fd3c" firstmac="00:50:00:00:0e:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="41" top="154">
+        <interface id="0" name="e0" type="ethernet" network_id="18" />
+      </node>
+      <node id="15" name="APP-DC" type="qemu" template="linux" image="linux-tinycore-6.4" console="telnet" cpu="1" cpulimit="1" ram="128" ethernet="1" uuid="ac86367a-d2c5-5bbb-957d-7e078953994b" firstmac="00:50:00:00:0f:00" qemu_options="-machine type=pc,accel=kvm -vga virtio -usbdevice tablet -boot order=cd" qemu_version="2.12.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server.png" config="0" left="901" top="154">
+        <interface id="0" name="e0" type="ethernet" network_id="19" />
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="pnet0" name="OOB-MGMT" left="440" top="61" visibility="1" />
+      <network id="2" type="bridge" name="PE1-P1" left="369" top="223" visibility="1" />
+      <network id="3" type="bridge" name="PE1-P2" left="369" top="376" visibility="1" />
+      <network id="4" type="bridge" name="P1-PE2" left="512" top="223" visibility="1" />
+      <network id="5" type="bridge" name="P2-PE2" left="512" top="376" visibility="1" />
+      <network id="6" type="bridge" name="HUB-MPLS" left="225" top="223" visibility="1" />
+      <network id="7" type="bridge" name="BR1-MPLS-A" left="184" top="369" visibility="1" />
+      <network id="8" type="bridge" name="BR1-MPLS-B" left="266" top="346" visibility="1" />
+      <network id="9" type="bridge" name="BR2-MPLS" left="666" top="376" visibility="1" />
+      <network id="10" type="bridge" name="DC-MPLS" left="666" top="223" visibility="1" />
+      <network id="11" type="bridge" name="HUB-INET" left="276" top="515" visibility="1" />
+      <network id="12" type="bridge" name="BR1-INET-A" left="195" top="522" visibility="1" />
+      <network id="13" type="bridge" name="BR1-INET-B" left="317" top="553" visibility="1" />
+      <network id="14" type="bridge" name="BR2-INET" left="645" top="522" visibility="1" />
+      <network id="15" type="bridge" name="DC-INET" left="655" top="515" visibility="1" />
+      <network id="16" type="bridge" name="LAN-BR1" left="92" top="445" visibility="1" />
+      <network id="17" type="bridge" name="LAN-BR2" left="840" top="445" visibility="1" />
+      <network id="18" type="bridge" name="LAN-HUB" left="92" top="154" visibility="1" />
+      <network id="19" type="bridge" name="LAN-DC" left="840" top="154" visibility="1" />
+    </networks>
+  </topology>
+</lab>

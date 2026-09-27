@@ -1,0 +1,56 @@
+{
+  "model_release": "aegis-binary-v1-challenger",
+  "model_type": "binary_present_attack_detector",
+  "evidence_status": "real_hybrid_current_state",
+  "trained_at": "2026-09-26T17:48:25.696368+00:00",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "classes": [
+    "BENIGN",
+    "ATTACK"
+  ],
+  "attack_probability_threshold": 0.07347887116644182,
+  "data_sources": [
+    "genis-temporal-v1",
+    "eve-cyber-temporal-v1"
+  ],
+  "promotion_eligible": false,
+  "alert_authority": false,
+  "promotion_policy": {
+    "min_local_benign_samples": 100,
+    "min_local_attack_samples": 30,
+    "max_local_fpr": 0.01,
+    "min_local_recall": 0.9,
+    "max_public_fpr": 0.01,
+    "min_public_recall": 0.9
+  }
+}

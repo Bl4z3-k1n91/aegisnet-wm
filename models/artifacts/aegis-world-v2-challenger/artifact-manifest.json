@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.875504+00:00",
+  "artifact": "aegis-world-v2-challenger",
+  "file_count": 7,
+  "directory_sha256": "b57ebffb61ec80993305ed66a07c6c31550c9e453bbeac4ff7932aafb3b4121a",
+  "files": {
+    "calibration.json": {
+      "sha256": "f950ff5a254102baa3946a1c1d8b7a1555dfe42899cd75a7e9d7b5defef9e814",
+      "size": 323
+    },
+    "direct_gru_baseline.pt": {
+      "sha256": "41644e5c9e7524926c319531eb4a54bcd7f12dca247b5362d4a6eedb91714a29",
+      "size": 84229
+    },
+    "metadata.json": {
+      "sha256": "2266df27e4715ac835ea0de168c1e3d3f9ffd7dc4c52d37ca09e213902db82e4",
+      "size": 2180
+    },
+    "metrics.json": {
+      "sha256": "65860d2ab023c0f5a42dbd441fb69065ae1bf178f8d5cd6f0bdbdf8615bccdc9",
+      "size": 18569
+    },
+    "REJECTED.json": {
+      "sha256": "f4bcc02f5fd0b26866bbf681c05ee2f23bd4ac4d402ab62523c904ff62e3f2f3",
+      "size": 555
+    },
+    "scaler.npz": {
+      "sha256": "97a59f5e742746ccda8cfb744925ce1bf0af121cd1b86109e2c5ff9f69c98fef",
+      "size": 732
+    },
+    "world_model.pt": {
+      "sha256": "091a8e32dcd16c730db7cf91a459ae6aafe45c3aeb16452317b7b16478904ff3",
+      "size": 221529
+    }
+  }
+}

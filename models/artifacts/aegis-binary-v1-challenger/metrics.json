@@ -1,0 +1,30 @@
+{
+  "validation": {
+    "threshold": 0.07347887116644182,
+    "recall": 0.7519747235387045,
+    "fpr": 0.009862299962783774,
+    "precision": 0.8998109640831758,
+    "accuracy": 0.9650407857499583,
+    "attack_samples": 633,
+    "benign_samples": 5374
+  },
+  "local_eve_test": {
+    "threshold": 0.07347887116644182,
+    "recall": 1.0,
+    "fpr": 0.0,
+    "precision": 1.0,
+    "accuracy": 1.0,
+    "attack_samples": 12,
+    "benign_samples": 20
+  },
+  "public_genis_test": {
+    "threshold": 0.07347887116644182,
+    "recall": 0.9920948616600791,
+    "fpr": 0.0059869996578857335,
+    "precision": 0.8776223776223776,
+    "accuracy": 0.9939334317101164,
+    "attack_samples": 253,
+    "benign_samples": 5846
+  },
+  "promotion_eligible": false
+}

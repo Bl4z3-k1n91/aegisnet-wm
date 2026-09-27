@@ -1,0 +1,93 @@
+{
+  "model_release": "seed-37",
+  "evidence_status": "real_public_dataset",
+  "data_release": "cicids-temporal-v1",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "classes": [
+    "BENIGN",
+    "RECONNAISSANCE",
+    "INITIAL_ACCESS_PATTERN",
+    "LATERAL_MOVEMENT",
+    "C2_BEACON_PATTERN",
+    "EXFILTRATION_LIKE",
+    "DDOS_LOW",
+    "DDOS_MEDIUM",
+    "DDOS_HIGH"
+  ],
+  "victims": [
+    "NONE",
+    "BR1",
+    "BR2",
+    "HUB",
+    "DC",
+    "MULTI"
+  ],
+  "history_steps": 6,
+  "window_seconds": 60,
+  "horizons_steps": [
+    1,
+    3,
+    6
+  ],
+  "horizons_seconds": [
+    60,
+    180,
+    360
+  ],
+  "latent_dim": 64,
+  "device_trained": "cpu",
+  "seed": 37,
+  "feature_transform": "log1p",
+  "class_counts_train": {
+    "BENIGN": 3615,
+    "INITIAL_ACCESS_PATTERN": 414,
+    "DDOS_HIGH": 225
+  },
+  "class_weights_train": {
+    "BENIGN": 0.11628559976816177,
+    "INITIAL_ACCESS_PATTERN": 1.0153924226760864,
+    "DDOS_HIGH": 1.8683220148086548
+  },
+  "attack_pos_weight": 5.657276995305164,
+  "change_pos_weight": 19.451923076923077,
+  "onset_pos_weight": 39.90384615384615,
+  "infiltration_pos_weight": 9.27536231884058,
+  "delta_encoding": true,
+  "transition_sampler": {
+    "transition_sequence_weight": 6.0,
+    "onset_sequence_weight": 3.0,
+    "transition_sequences": 127,
+    "onset_sequences": 63
+  },
+  "victim_supervision": "generic only: NONE for benign, MULTI for attack; CIC hosts are not mapped into the EVE topology"
+}

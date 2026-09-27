@@ -1,0 +1,52 @@
+{
+  "model_release": "ctu13-open-world-v1",
+  "model_type": "hist_gradient_boosted_open_world_attack_forecaster",
+  "evidence_status": "real_public_dataset",
+  "data_release": "ctu13-temporal-v1",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "history_steps": 6,
+  "window_seconds": 10,
+  "horizons_steps": [
+    1,
+    3,
+    6
+  ],
+  "horizons_seconds": [
+    10,
+    30,
+    60
+  ],
+  "input_transform": "log1p_nonnegative + [last,mean,std,last_delta,history_slope]",
+  "split_strategy": "scenario-level split: 42-50 train, 51-52 validation, 53-54 test",
+  "seed": 42
+}

@@ -1,0 +1,24 @@
+{
+  "status": "REJECTED",
+  "reason": "Failed untouched EVE acceptance set",
+  "acceptance_summary": {
+    "+10s": {
+      "accuracy": 0.3125,
+      "benign_fpr": 1.0,
+      "attack_auroc": 0.7708333333333334
+    },
+    "+30s": {
+      "accuracy": 0.1875,
+      "benign_fpr": 1.0,
+      "attack_auroc": 0.409090909090909
+    },
+    "+60s": {
+      "accuracy": 0.25,
+      "benign_fpr": 0.88,
+      "attack_auroc": 0.1657142857142857
+    }
+  },
+  "promotion_allowed": false,
+  "alert_authority": false,
+  "replacement": "models/artifacts/genis-world-v1"
+}

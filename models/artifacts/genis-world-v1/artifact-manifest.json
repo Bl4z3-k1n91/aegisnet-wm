@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.711326+00:00",
+  "artifact": "genis-world-v1",
+  "file_count": 6,
+  "directory_sha256": "803d4d999fb380109b236d63b05e65575e4fe7399377ae398181c2deac8487f1",
+  "files": {
+    "calibration.json": {
+      "sha256": "e2c43769a1f1b43d5783169eaba958e5bad0f9aaeb59f4ba94f3610c03a5b222",
+      "size": 323
+    },
+    "direct_gru_baseline.pt": {
+      "sha256": "7c0e7198519b967b4a41c7c635c30a5de22993ab576a51dc248da02efce2bfb2",
+      "size": 84229
+    },
+    "metadata.json": {
+      "sha256": "b1c3be96b5afbb5493f3b9ab6a14131f297841223de9ac5528d3d354869ff2b0",
+      "size": 2153
+    },
+    "metrics.json": {
+      "sha256": "3fb13ba28ec17b20254b79de369be280077776868b56fbfee6a8ca17fc5d8c97",
+      "size": 18763
+    },
+    "scaler.npz": {
+      "sha256": "cb2eacfdcaba36756c823f84bfba2994450ad806fdfbd9cfa250a7978df8992e",
+      "size": 732
+    },
+    "world_model.pt": {
+      "sha256": "45152ea87d5aea84de22c62cdf8ab2795fe934717ef195311fb7dd610cc0b74f",
+      "size": 221529
+    }
+  }
+}

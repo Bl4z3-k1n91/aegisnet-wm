@@ -1,0 +1,8 @@
+numpy==2.4.3
+pandas==2.3.3
+scikit-learn==1.8.0
+joblib==1.5.3
+torch==2.7.0
+psutil==7.2.2
+streamlit==1.63.0
+paramiko==4.0.0

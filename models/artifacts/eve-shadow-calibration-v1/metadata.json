@@ -1,0 +1,35 @@
+{
+  "model_release": "eve-shadow-calibration-v1",
+  "model_type": "eve_domain_shadow_stacker",
+  "evidence_status": "real_local_eve_calibration",
+  "data_release": "eve-cyber-temporal-v1",
+  "shadow_models": [
+    "GENIS",
+    "CTU13",
+    "CICIDS2017"
+  ],
+  "features": [
+    "GENIS_probability",
+    "GENIS_present",
+    "CTU13_probability",
+    "CTU13_present",
+    "CICIDS2017_probability",
+    "CICIDS2017_present",
+    "mean_probability",
+    "max_probability",
+    "min_probability",
+    "spread",
+    "native_alert_fraction",
+    "model_fraction"
+  ],
+  "horizons_seconds": [
+    10,
+    30,
+    60
+  ],
+  "window_seconds": 10,
+  "split_strategy": "run-level split from scenario_runs.split",
+  "seed": 42,
+  "authority_policy": "never auto-promote; runtime remains shadow-only",
+  "watch_policy": "advisory early-warning tier only; never changes operator health state"
+}

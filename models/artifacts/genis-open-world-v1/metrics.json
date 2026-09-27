@@ -1,0 +1,65 @@
+{
+  "1": {
+    "auroc": 0.9951333231465318,
+    "auprc": 0.979244294426131,
+    "threshold": 0.02,
+    "balanced_accuracy": 0.9707127200247728,
+    "precision": 0.49899799599198397,
+    "recall": 0.9841897233201581,
+    "f1": 0.6622340425531915,
+    "false_positive_rate": 0.04276428327061239,
+    "positive_rate": 0.04148221019839318,
+    "predicted_positive_rate": 0.08181669126086244,
+    "onset_benign_histories": 5846,
+    "onset_positive_samples": 6,
+    "onset": {
+      "auroc": 0.8028253424657533,
+      "auprc": 0.009908364287000596,
+      "recall_at_threshold": 0.3333333333333333,
+      "f1_at_threshold": 0.015748031496062992,
+      "false_positive_rate_at_threshold": 0.04212328767123288
+    }
+  },
+  "3": {
+    "auroc": 0.9900158075722193,
+    "auprc": 0.9393982131102,
+    "threshold": 0.02,
+    "balanced_accuracy": 0.9532682730261156,
+    "precision": 0.49382716049382713,
+    "recall": 0.9486166007905138,
+    "f1": 0.6495263870094723,
+    "false_positive_rate": 0.042080054738282587,
+    "positive_rate": 0.04148221019839318,
+    "predicted_positive_rate": 0.07968519429414658,
+    "onset_benign_histories": 5846,
+    "onset_positive_samples": 13,
+    "onset": {
+      "auroc": 0.8410502578169302,
+      "auprc": 0.011646566910558522,
+      "recall_at_threshold": 0.15384615384615385,
+      "f1_at_threshold": 0.015873015873015872,
+      "false_positive_rate_at_threshold": 0.040630893193896796
+    }
+  },
+  "6": {
+    "auroc": 0.9931587288494278,
+    "auprc": 0.9142524205677893,
+    "threshold": 0.02,
+    "balanced_accuracy": 0.9477454264190643,
+    "precision": 0.37712519319938176,
+    "recall": 0.9644268774703557,
+    "f1": 0.5422222222222223,
+    "false_positive_rate": 0.06893602463222716,
+    "positive_rate": 0.04148221019839318,
+    "predicted_positive_rate": 0.10608296442039679,
+    "onset_benign_histories": 5846,
+    "onset_positive_samples": 22,
+    "onset": {
+      "auroc": 0.9342805631868133,
+      "auprc": 0.05106063323887735,
+      "recall_at_threshold": 0.5909090909090909,
+      "f1_at_threshold": 0.06190476190476191,
+      "false_positive_rate_at_threshold": 0.06610576923076923
+    }
+  }
+}

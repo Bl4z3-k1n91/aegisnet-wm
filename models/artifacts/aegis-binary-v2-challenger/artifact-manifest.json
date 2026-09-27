@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:12.017326+00:00",
+  "artifact": "aegis-binary-v2-challenger",
+  "file_count": 4,
+  "directory_sha256": "c0a9e2b2089e006eeedf55faf25b87264b5f47e446fa33f0b866194d2cdcf410",
+  "files": {
+    "logistic_pipeline.joblib": {
+      "sha256": "a1acfd20bb5599138005cacdf06ff99240b1ac38b010d18755f279b08a50bcc7",
+      "size": 2513
+    },
+    "metadata.json": {
+      "sha256": "ef6c10167e91a30112e1f6d1773532878865202cbfa94575af45c7ecf0875cb4",
+      "size": 1327
+    },
+    "metrics.json": {
+      "sha256": "b9ac8aa313137f67e84f6b20ae8f5462a1e4324a85d66004ef2a00e698d1521f",
+      "size": 819
+    },
+    "random_forest_pipeline.joblib": {
+      "sha256": "2e28074043684e4f653fb41c7badd4c1df35c14f2dacab00fc83780544550eb2",
+      "size": 5275298
+    }
+  }
+}

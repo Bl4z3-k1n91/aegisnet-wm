@@ -1,0 +1,92 @@
+{
+  "model_release": "cicids2017-world-v1",
+  "evidence_status": "real_public_dataset",
+  "data_release": "cicids2017-temporal-v1",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "classes": [
+    "BENIGN",
+    "RECONNAISSANCE",
+    "INITIAL_ACCESS_PATTERN",
+    "LATERAL_MOVEMENT",
+    "C2_BEACON_PATTERN",
+    "EXFILTRATION_LIKE",
+    "DDOS_LOW",
+    "DDOS_MEDIUM",
+    "DDOS_HIGH"
+  ],
+  "victims": [
+    "NONE",
+    "BR1",
+    "BR2",
+    "HUB",
+    "DC",
+    "MULTI"
+  ],
+  "history_steps": 6,
+  "window_seconds": 60,
+  "horizons_steps": [
+    1,
+    3,
+    6
+  ],
+  "horizons_seconds": [
+    60,
+    180,
+    360
+  ],
+  "latent_dim": 64,
+  "device_trained": "cpu",
+  "seed": 42,
+  "class_counts_train": {
+    "BENIGN": 3714,
+    "INITIAL_ACCESS_PATTERN": 414,
+    "DDOS_HIGH": 225
+  },
+  "class_weights_train": {
+    "BENIGN": 0.11330297589302063,
+    "INITIAL_ACCESS_PATTERN": 1.0164426565170288,
+    "DDOS_HIGH": 1.8702545166015625
+  },
+  "attack_pos_weight": 5.812206572769953,
+  "change_pos_weight": 19.927884615384617,
+  "onset_pos_weight": 40.85576923076923,
+  "infiltration_pos_weight": 9.514492753623188,
+  "delta_encoding": true,
+  "transition_sampler": {
+    "transition_sequence_weight": 6.0,
+    "onset_sequence_weight": 3.0,
+    "transition_sequences": 127,
+    "onset_sequences": 63
+  },
+  "victim_supervision": "generic only: NONE for benign, MULTI for attack; CIC hosts are not mapped into the EVE topology"
+}

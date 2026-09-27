@@ -1,0 +1,39 @@
+{
+  "validation_operating_point": {
+    "threshold": 0.4,
+    "coverage": 0.99952373392602,
+    "retained_accuracy": 0.9212198221092758,
+    "attack_recall": 0.5456238361266295,
+    "benign_fpr": 0.003471017007983339,
+    "benign_samples": 5762,
+    "attack_samples": 537,
+    "abstained": 3,
+    "exact_accuracy_without_abstention": 0.9207810763613272,
+    "macro_f1_without_abstention": 0.24584170279999856
+  },
+  "local_eve_test": {
+    "threshold": 0.4,
+    "coverage": 1.0,
+    "retained_accuracy": 0.9809523809523809,
+    "attack_recall": 1.0,
+    "benign_fpr": 0.016304347826086956,
+    "benign_samples": 184,
+    "attack_samples": 26,
+    "abstained": 0,
+    "exact_accuracy_without_abstention": 0.9809523809523809,
+    "macro_f1_without_abstention": 0.5829487569761542
+  },
+  "public_genis_test": {
+    "threshold": 0.4,
+    "coverage": 0.9996720773897361,
+    "retained_accuracy": 0.9604723634574381,
+    "attack_recall": 0.9762845849802372,
+    "benign_fpr": 0.0005131713992473486,
+    "benign_samples": 5846,
+    "attack_samples": 253,
+    "abstained": 2,
+    "exact_accuracy_without_abstention": 0.9601574028529267,
+    "macro_f1_without_abstention": 0.4210869958877088
+  },
+  "promotion_eligible": false
+}

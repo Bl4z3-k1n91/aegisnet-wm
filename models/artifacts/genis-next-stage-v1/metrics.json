@@ -1,0 +1,18 @@
+{
+  "validation": {
+    "samples": 5767,
+    "transition_samples": 417,
+    "accuracy": 0.9008149817929599,
+    "macro_f1": 0.30178163404594455,
+    "transition_accuracy": 0.3237410071942446,
+    "transition_macro_f1": 0.2123440285204991
+  },
+  "test": {
+    "samples": 6099,
+    "transition_samples": 51,
+    "accuracy": 0.9290047548778488,
+    "macro_f1": 0.25979635501923354,
+    "transition_accuracy": 0.43137254901960786,
+    "transition_macro_f1": 0.25846702317290554
+  }
+}

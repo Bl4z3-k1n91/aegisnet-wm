@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.799430+00:00",
+  "artifact": "eve-shadow-calibration-v1",
+  "file_count": 7,
+  "directory_sha256": "40e56ae743718b0e31845be286906187bb77bec92aa197d3cb3b2102dcfb8c93",
+  "files": {
+    "meta_h10.joblib": {
+      "sha256": "4d7e79c00dbddbcd6c84d5fd8aaf449229afb4cab7c5a11b8779d54c35c6ebce",
+      "size": 959
+    },
+    "meta_h30.joblib": {
+      "sha256": "4d6adfdbebe5f7402916eea48f7a25009e18b6452434894401e63e9a6ff54a33",
+      "size": 959
+    },
+    "meta_h60.joblib": {
+      "sha256": "634089368c2a8ea4af545bb6f5a4ac2aed72ad1edc4fc1cb50493032170a6925",
+      "size": 959
+    },
+    "metadata.json": {
+      "sha256": "d1dcdd14591baf5c55a67ce14cb2668b7706bc8009789e7abe27cd01984ab889",
+      "size": 915
+    },
+    "metrics.json": {
+      "sha256": "32eff18aa59cb8590192720c90ad29bb191eae582d3e71093da2b68098b2b96d",
+      "size": 3784
+    },
+    "promotion.json": {
+      "sha256": "48bbbd566acdd68b25c8032693c031ab1525acdc2c7f6ba953fd07041325c80b",
+      "size": 988
+    },
+    "thresholds.json": {
+      "sha256": "5afc7ffac19bf079b08c2ac47eac51394d8f9d067164a24e87a1d8bf8e8c7b84",
+      "size": 1236
+    }
+  }
+}

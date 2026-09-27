@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.752232+00:00",
+  "artifact": "ctu13-open-world-v1",
+  "file_count": 6,
+  "directory_sha256": "833eb1d8ede1b382290a7470d6d6f5561c44219dba687c39deaf2ba4e4feadfc",
+  "files": {
+    "attack_h1.joblib": {
+      "sha256": "2a32d9808fad5b94598f0f0051e08ddeb5e561b9731754c55157169f68afd4f8",
+      "size": 1044120
+    },
+    "attack_h3.joblib": {
+      "sha256": "c17bc04ef184f5e3ac2da281cbdcd864b80545de21af34cfe01d96241eb246fd",
+      "size": 946096
+    },
+    "attack_h6.joblib": {
+      "sha256": "464b6ac444330e8b0f2965174da6d6d45e44f6485ce6a182b2a15b7cd212becb",
+      "size": 927912
+    },
+    "calibration.json": {
+      "sha256": "b4bc497b50e0ef3442ed2509f4e098c1f7300e54032b411afcd95e64bba8fa4f",
+      "size": 370
+    },
+    "metadata.json": {
+      "sha256": "f2ea8c06643aad398df443d8ae923668907ff9c2c9bf837273ccb7512649932d",
+      "size": 1202
+    },
+    "metrics.json": {
+      "sha256": "88aa52a1eed192e8829fd90e4e98ab93d40391bbb31bdbed4bf183cdd3d3141b",
+      "size": 2201
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-26T18:07:11.774390+00:00",
+  "artifact": "cicids2017-open-world-v1",
+  "file_count": 6,
+  "directory_sha256": "07a15d7f433f66ba1798b785ded7c596c8779199eb0dfcc449097eb19f53aede",
+  "files": {
+    "attack_h1.joblib": {
+      "sha256": "d8b229f08ae25cf0f7b6a119cfa4e8e8b1c2f3952e145895884779d354d972f3",
+      "size": 928176
+    },
+    "attack_h3.joblib": {
+      "sha256": "44b83364ef17d13136d52503de9bb65051d0f4b7dc15b044bafa92d53ba3f451",
+      "size": 963344
+    },
+    "attack_h6.joblib": {
+      "sha256": "08c4d673abe8c7b06e7fc93416e81c505ba82fabfd7915b687eae25e4bff7ffc",
+      "size": 1005008
+    },
+    "calibration.json": {
+      "sha256": "b6d8b61dafe0d8efbd54d813907cfd00685cc3b3ea0d37ebd2c2ae30b38c69f5",
+      "size": 353
+    },
+    "metadata.json": {
+      "sha256": "9771d933559e94519456144ac8e5e7238f57a76434dce6027322c947b05aba64",
+      "size": 1214
+    },
+    "metrics.json": {
+      "sha256": "e7c0b8d0e56264165a949a72d1982ffbabbaa4e27cf8fc879ff63e67ad68923a",
+      "size": 2150
+    }
+  }
+}
