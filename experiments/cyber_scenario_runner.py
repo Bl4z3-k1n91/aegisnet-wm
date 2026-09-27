@@ -35,7 +35,13 @@ from scenario_store import ScenarioStore  # noqa: E402
 FIXED_TARGET = "10.20.10.10"
 FIXED_DDOS_PORT = 9993
 CONTROLLED_NODES = {"CLIENT-BR1", "CLIENT-BR2", "SERVICE-HUB", "APP-DC"}
-SCENARIOS = ("recon-initial-access", "recon-ddos", "benign-soak")
+SCENARIOS = (
+    "recon-initial-access",
+    "recon-ddos",
+    "recon-ddos-medium",
+    "recon-ddos-high",
+    "benign-soak",
+)
 
 
 def _existing_local_eve_password() -> str | None:
@@ -165,21 +171,41 @@ def initial_access_commands(shell: EndpointShell) -> tuple[Callable[[], None], C
     )
 
 
-def ddos_commands(shell: EndpointShell) -> tuple[Callable[[], None], Callable[[], None]]:
+def ddos_commands(
+    shell: EndpointShell,
+    severity: str = "low",
+) -> tuple[Callable[[], None], Callable[[], None], str, dict[str, object]]:
+    profiles = {
+        "low": (("CLIENT-BR1",), 16, 1.0, "DDOS_LOW"),
+        "medium": (("CLIENT-BR1", "CLIENT-BR2"), 32, 1.0, "DDOS_MEDIUM"),
+        "high": (("CLIENT-BR1", "CLIENT-BR2", "SERVICE-HUB"), 64, 0.5, "DDOS_HIGH"),
+    }
+    nodes, kib, sleep_seconds, label = profiles[severity]
     source = (
-        f"while true; do dd if=/dev/zero bs=1024 count=16 2>/dev/null | "
-        f"nc -u -w 1 {FIXED_TARGET} {FIXED_DDOS_PORT} >/dev/null 2>&1; sleep 1; done"
+        f"while true; do dd if=/dev/zero bs=1024 count={kib} 2>/dev/null | "
+        f"nc -u -w 1 {FIXED_TARGET} {FIXED_DDOS_PORT} >/dev/null 2>&1; "
+        f"sleep {sleep_seconds}; done"
     )
 
     def start() -> None:
         shell.run("APP-DC", "/home/gns3/ddos-victim.sh", wait=0.8)
-        shell.start_background("CLIENT-BR1", "ddos-low", source)
+        for node in nodes:
+            shell.start_background(node, f"ddos-{severity}", source)
 
     def stop() -> None:
-        shell.stop_background("CLIENT-BR1", "ddos-low")
+        for node in nodes:
+            shell.stop_background(node, f"ddos-{severity}")
         shell.run("APP-DC", "/home/gns3/ddos-stop.sh", wait=0.5)
 
-    return start, stop
+    return start, stop, label, {
+        "target": FIXED_TARGET,
+        "port": FIXED_DDOS_PORT,
+        "severity": severity,
+        "sources": list(nodes),
+        "kib_per_burst": kib,
+        "sleep_seconds": sleep_seconds,
+        "bounded": True,
+    }
 
 
 def run(args: argparse.Namespace) -> int:
@@ -245,9 +271,11 @@ def run(args: argparse.Namespace) -> int:
                 label = "INITIAL_ACCESS_PATTERN"
                 details = {"target": FIXED_TARGET, "port": 22, "pattern": "repeated-connect"}
             else:
-                attack_start, attack_stop = ddos_commands(shell)
-                label = "DDOS_LOW"
-                details = {"target": FIXED_TARGET, "port": FIXED_DDOS_PORT, "rate": "bounded-low"}
+                severity = (
+                    "medium" if args.scenario == "recon-ddos-medium"
+                    else ("high" if args.scenario == "recon-ddos-high" else "low")
+                )
+                attack_start, attack_stop, label, details = ddos_commands(shell, severity)
             record_phase(
                 store,
                 run_id,

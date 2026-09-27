@@ -69,6 +69,13 @@ For a production-advisory deployment require:
 Production authority additionally requires
 `automated_alert_authority_ready = true`.
 
+The current authority challenger is `aegis-binary-v6-temporal-authority`. It
+uses three non-overlapping 10-second EVE state vectors (30 seconds total) and
+is evaluated only against the exact locked campaign `authority-acceptance-v2`.
+The live service independently verifies that the acceptance report names both
+the configured artifact and configured campaign before it can honor an
+authority-enable flag.
+
 ## Release freeze
 
 After tests and readiness pass, commit the working tree and create a release:

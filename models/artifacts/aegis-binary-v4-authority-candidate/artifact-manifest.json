@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T05:02:54.956104+00:00",
+  "artifact": "aegis-binary-v4-authority-candidate",
+  "file_count": 4,
+  "directory_sha256": "36a56d5350854760671705702483eba56e5ec38f00aa2bb3eba9c7d419574f2a",
+  "files": {
+    "logistic_pipeline.joblib": {
+      "sha256": "5f3134adff0839572cc657d4aae3990dd5ed9de830795532434ec4b90995046e",
+      "size": 2513
+    },
+    "metadata.json": {
+      "sha256": "79b31a3635c057f7af2d5e8760e2b14abef4c0ad8c51f987cdb7729c60e95af9",
+      "size": 1409
+    },
+    "metrics.json": {
+      "sha256": "53e65b4d69e8d3b86348dc1601afaa5fccb3e2594b4f29fcb37b4a24869bdd3d",
+      "size": 1025
+    },
+    "random_forest_pipeline.joblib": {
+      "sha256": "4a8a0bcce04d8af1cc46e91c71754ebbf1f102929a0215f3a7163c34f7c0a1ef",
+      "size": 3427778
+    }
+  }
+}

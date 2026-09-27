@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T06:29:40.161983+00:00",
+  "artifact": "aegis-binary-v6-temporal-authority",
+  "file_count": 3,
+  "directory_sha256": "8a784d013314a981c496eb1269cd7d91c9901682494c8de4e04ebc09a2837885",
+  "files": {
+    "authority_model.joblib": {
+      "sha256": "8f2cbe1f09bb5e3e4cc3e490c2dff523389bc8789a01effc20198ce286928db9",
+      "size": 2224201
+    },
+    "metadata.json": {
+      "sha256": "cdf0f2e7a10e52c286289aa0de2d5787fa4938f48928a26ff0fcbba9bc98661a",
+      "size": 1335
+    },
+    "metrics.json": {
+      "sha256": "d33ad8a80305ccaa74a2c58dbebfd62aaaa668a76336348d91ca966885fd02a7",
+      "size": 282
+    }
+  }
+}

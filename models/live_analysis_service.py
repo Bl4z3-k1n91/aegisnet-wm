@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 import joblib
+import numpy as np
 import pandas as pd
 
 
@@ -217,6 +218,46 @@ def binary_predict(
         "confidence": attack_probability if attack else 1.0 - attack_probability,
         "threshold": threshold,
         "model_votes": probabilities,
+    }
+
+
+def temporal_binary_predict(
+    states: list[dict[str, Any]],
+    model: Any,
+    *,
+    features: list[str],
+    history_steps: int,
+    threshold: float,
+) -> dict[str, Any]:
+    observed = len(states)
+    if observed < history_steps:
+        return {
+            "label": "UNKNOWN",
+            "attack_probability": None,
+            "confidence": None,
+            "threshold": threshold,
+            "history_steps_observed": observed,
+            "history_steps_required": history_steps,
+            "status": "WARMING_UP",
+        }
+    rows = states[-history_steps:]
+    values = np.asarray(
+        [[float(row.get(name) or 0.0) for name in features] for row in rows],
+        dtype=np.float64,
+    ).reshape(1, -1)
+    values = np.log1p(np.clip(values, 0.0, None))
+    raw = model.predict_proba(values)[0]
+    labels = [str(value) for value in model.classes_]
+    attack_probability = float(raw[labels.index("ATTACK")])
+    attack = attack_probability >= threshold
+    return {
+        "label": "ATTACK" if attack else "BENIGN",
+        "attack_probability": attack_probability,
+        "confidence": attack_probability if attack else 1.0 - attack_probability,
+        "threshold": threshold,
+        "history_steps_observed": observed,
+        "history_steps_required": history_steps,
+        "status": "READY",
     }
 
 
@@ -437,12 +478,23 @@ def run(poll_seconds: float) -> int:
             if not binary_integrity.get("valid"):
                 raise RuntimeError("artifact integrity verification failed")
             binary_metadata = json.loads((binary_artifact / "metadata.json").read_text(encoding="utf-8"))
-            binary_detector = {
-                "logistic": joblib.load(binary_artifact / "logistic_pipeline.joblib"),
-                "forest": joblib.load(binary_artifact / "random_forest_pipeline.joblib"),
-                "metadata": binary_metadata,
-                "threshold": float(binary_metadata["attack_probability_threshold"]),
-            }
+            if binary_metadata.get("model_type") == "temporal_binary_present_attack_detector":
+                binary_detector = {
+                    "mode": "TEMPORAL",
+                    "model": joblib.load(binary_artifact / "authority_model.joblib"),
+                    "metadata": binary_metadata,
+                    "threshold": float(binary_metadata["attack_probability_threshold"]),
+                    "features": list(binary_metadata["features"]),
+                    "history_steps": int(binary_metadata.get("history_steps", 3)),
+                }
+            else:
+                binary_detector = {
+                    "mode": "SINGLE_WINDOW",
+                    "logistic": joblib.load(binary_artifact / "logistic_pipeline.joblib"),
+                    "forest": joblib.load(binary_artifact / "random_forest_pipeline.joblib"),
+                    "metadata": binary_metadata,
+                    "threshold": float(binary_metadata["attack_probability_threshold"]),
+                }
         except Exception as exc:
             binary_load_error = f"{type(exc).__name__}: {exc}"
     for name, artifact_dir in SHADOW_OPEN_WORLD_ARTIFACTS.items():
@@ -495,6 +547,25 @@ def run(poll_seconds: float) -> int:
         ood_load_error = f"{type(exc).__name__}: {exc}"
     decision_machine = DecisionStateMachine(DECISION_STATE_FILE, policy)
     state_history = StateHistory(maxlen=12)
+    binary_history = StateHistory(maxlen=12)
+    last_binary_bin: int | None = None
+    last_binary_result: dict[str, Any] | None = None
+    acceptance_report = {}
+    acceptance_path_value = str(policy.get("authority_acceptance_report") or "")
+    if acceptance_path_value:
+        acceptance_path = resolve_repo_path(acceptance_path_value)
+        try:
+            acceptance_report = json.loads(acceptance_path.read_text(encoding="utf-8"))
+        except Exception:
+            acceptance_report = {}
+    configured_authority = bool(policy.get("current_detector_authority_enabled", False))
+    authority_enabled = bool(
+        configured_authority
+        and acceptance_report.get("promotion_evidence_pass")
+        and acceptance_report.get("artifact")
+        == ((binary_detector or {}).get("metadata") or {}).get("model_release")
+        and acceptance_report.get("campaign_id") == policy.get("authority_acceptance_campaign")
+    )
     PID_FILE.write_text(str(os.getpid()), encoding="ascii")
 
     connection = sqlite3.connect(DATABASE, timeout=60)
@@ -685,23 +756,40 @@ def run(poll_seconds: float) -> int:
                         risk,
                         current_confidence_threshold,
                     )
-                    authority_enabled = bool(policy.get("current_detector_authority_enabled", False))
                     binary_result = None
                     if binary_detector is not None:
-                        binary_result = binary_predict(
-                            state,
-                            binary_detector["logistic"],
-                            binary_detector["forest"],
-                            binary_detector["threshold"],
-                        )
+                        if binary_detector.get("mode") == "TEMPORAL":
+                            bin_epoch = int(latest.timestamp() // 10) * 10
+                            if bin_epoch != last_binary_bin:
+                                bin_end = datetime.fromtimestamp(bin_epoch, tz=timezone.utc)
+                                bin_start = bin_end - timedelta(seconds=10)
+                                bin_rows = flow_rows(connection, bin_start, bin_end)
+                                bin_previous = flow_rows(connection, bin_start - timedelta(seconds=60), bin_start)
+                                binary_history.append(build_state(bin_rows, previous_records=bin_previous))
+                                last_binary_result = temporal_binary_predict(
+                                    binary_history.values(),
+                                    binary_detector["model"],
+                                    features=binary_detector["features"],
+                                    history_steps=binary_detector["history_steps"],
+                                    threshold=binary_detector["threshold"],
+                                )
+                                last_binary_bin = bin_epoch
+                            binary_result = last_binary_result
+                        else:
+                            binary_result = binary_predict(
+                                state,
+                                binary_detector["logistic"],
+                                binary_detector["forest"],
+                                binary_detector["threshold"],
+                            )
                     authority_label = (
                         str(binary_result["label"])
-                        if authority_enabled and binary_result is not None
+                        if authority_enabled and binary_result is not None and binary_result.get("label") != "UNKNOWN"
                         else "UNKNOWN"
                     )
                     authority_confidence = (
                         float(binary_result["confidence"])
-                        if authority_enabled and binary_result is not None
+                        if authority_enabled and binary_result is not None and binary_result.get("confidence") is not None
                         else confidence
                     )
                     data_valid_for_authority = bool(telemetry.get("healthy")) and (
@@ -875,6 +963,9 @@ def run(poll_seconds: float) -> int:
                             "risk_band": decision_band,
                             "decision_source": decision_source,
                             "current_detector_authority_enabled": authority_enabled,
+                            "current_detector_authority_configured": configured_authority,
+                            "authority_acceptance_campaign": policy.get("authority_acceptance_campaign"),
+                            "authority_acceptance_pass": bool(acceptance_report.get("promotion_evidence_pass")),
                             "current_detector_release": current_metadata.get("model_release", current_artifact.name),
                             "current_detector_evidence_status": current_metadata.get("evidence_status"),
                             "current_detector_confidence_threshold": current_confidence_threshold,

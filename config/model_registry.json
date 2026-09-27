@@ -15,10 +15,10 @@
       "reason": "broader real EVE + GeNIS stage model; 98.1% local held-out accuracy, stage output remains advisory"
     },
     "binary_challenger": {
-      "artifact": "models/artifacts/aegis-binary-v3-challenger",
+      "artifact": "models/artifacts/aegis-binary-v6-temporal-authority",
       "status": "CHALLENGER_PENDING_LOCAL_ACCEPTANCE",
       "alert_authority": false,
-      "reason": "local test: 100% raw recall; two-window confirmation 0 false alert episodes and 100% phase detection, but independent attack-window count is below final gate"
+      "reason": "30-second temporal EVE-local hard-negative challenger; development validation 100% recall at 0.42% FPR. Exact locked campaign authority-acceptance-v2 is required before authority can be enabled"
     }
   },
   "forecasting": {

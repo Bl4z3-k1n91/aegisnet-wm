@@ -41,6 +41,28 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def write_json_status(path: Path, payload: dict[str, Any]) -> None:
+    """Publish a status snapshot without letting transient Windows readers kill the heartbeat.
+
+    ``os.replace`` can raise ``PermissionError`` on Windows when another process
+    briefly has the destination open.  Health/status readers are expected to be
+    concurrent, so retry the atomic replace and keep the heartbeat thread alive.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f"{path.name}.{os.getpid()}.tmp")
+    temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    last_error: OSError | None = None
+    for attempt in range(20):
+        try:
+            temporary.replace(path)
+            return
+        except PermissionError as exc:
+            last_error = exc
+            time.sleep(0.05 * (attempt + 1))
+    if last_error is not None:
+        raise last_error
+
+
 def load_dotenv(path: Path) -> None:
     if not path.is_file():
         return
@@ -209,16 +231,17 @@ class TelemetryService:
     def status_loop(self) -> None:
         counts: dict[str, int] = {}
         while not self.stop_event.wait(2.0):
-            current = self.store.try_counts()
-            if current is not None:
-                counts = current
-            snapshot = self.state.snapshot(counts)
-            temporary = self.args.status_file.with_suffix(".tmp")
-            temporary.parent.mkdir(parents=True, exist_ok=True)
-            temporary.write_text(
-                json.dumps(snapshot, indent=2) + "\n", encoding="utf-8"
-            )
-            temporary.replace(self.args.status_file)
+            try:
+                current = self.store.try_counts()
+                if current is not None:
+                    counts = current
+                snapshot = self.state.snapshot(counts)
+                write_json_status(self.args.status_file, snapshot)
+            except BaseException as exc:
+                # A status-publish failure must never silently terminate the
+                # heartbeat thread.  Keep retrying on the next cycle and leave
+                # an explicit diagnostic in the service log.
+                logging.warning("status heartbeat publish failed: %s: %s", type(exc).__name__, exc)
 
     def run(self) -> int:
         self.args.pid_file.parent.mkdir(parents=True, exist_ok=True)
@@ -253,9 +276,7 @@ class TelemetryService:
             final_status = self.state.snapshot(self.store.counts())
             final_status["state"] = "FAILED" if self.state.fatal_errors else "STOPPED"
             final_status["health"] = "FAILED" if self.state.fatal_errors else "STOPPED"
-            self.args.status_file.write_text(
-                json.dumps(final_status, indent=2) + "\n", encoding="utf-8"
-            )
+            write_json_status(self.args.status_file, final_status)
             self.flow_writer.close()
             self.syslog_output.close()
             self.store.close()

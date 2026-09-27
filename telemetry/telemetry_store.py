@@ -508,7 +508,14 @@ class TelemetryStore:
             }
 
     def try_counts(self, timeout: float = 0.1) -> dict[str, int] | None:
-        """Return counts without allowing status heartbeats to block on writes."""
+        """Return fast append-only row counters for status heartbeats.
+
+        Telemetry tables are append-only during normal service operation.  Using
+        ``MAX(id)`` avoids repeated full ``COUNT(*)`` scans as the database grows;
+        exact counts remain available through :meth:`counts` for offline/reporting
+        use.  The primary-key lookup is important because this method runs from the
+        two-second health-heartbeat loop.
+        """
         acquired = self.lock.acquire(timeout=timeout)
         if not acquired:
             return None
@@ -525,7 +532,7 @@ class TelemetryStore:
             return {
                 table: int(
                     self.connection.execute(
-                        f"SELECT COUNT(*) FROM {table}"
+                        f"SELECT COALESCE(MAX(id),0) FROM {table}"
                     ).fetchone()[0]
                 )
                 for table in tables

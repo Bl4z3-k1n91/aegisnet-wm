@@ -60,22 +60,32 @@ def main() -> int:
     parser.add_argument("--database", type=Path, default=ROOT / "outputs" / "telemetry.db")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "dataset" / "releases" / "eve-current-v2")
     parser.add_argument("--window-seconds", type=int, default=10)
+    parser.add_argument(
+        "--campaign-id",
+        action="append",
+        default=[],
+        help="Optional exact campaign_id filter. Repeat to include multiple campaigns.",
+    )
     args = parser.parse_args()
 
     connection = sqlite3.connect(f"file:{args.database.as_posix()}?mode=ro", uri=True)
     connection.row_factory = sqlite3.Row
     try:
-        phases = connection.execute(
-            """
+        query = """
             SELECT r.id run_id,r.scenario,r.campaign_id,COALESCE(r.split,'train') split,
                    p.id phase_id,p.label,p.started_at,p.ended_at
             FROM scenario_runs r
             JOIN scenario_phases p ON p.run_id=r.id
             WHERE r.status IN ('COMPLETED','TRAFFIC_ONLY')
               AND p.ended_at IS NOT NULL
-            ORDER BY r.id,p.started_at
-            """
-        ).fetchall()
+        """
+        params: list[Any] = []
+        if args.campaign_id:
+            placeholders = ",".join("?" for _ in args.campaign_id)
+            query += f" AND r.campaign_id IN ({placeholders})"
+            params.extend(args.campaign_id)
+        query += " ORDER BY r.id,p.started_at"
+        phases = connection.execute(query, params).fetchall()
         selected = []
         for row in phases:
             raw = str(row["label"] or "").strip().upper()
@@ -167,6 +177,7 @@ def main() -> int:
         "history_steps": 1,
         "window_seconds": args.window_seconds,
         "split_strategy": "scenario_runs split; complete phases/runs never cross train/validation/test",
+        "campaign_filter": list(args.campaign_id),
         "benign_definition": sorted(BENIGN_LABELS),
         "attack_definition": ATTACK_MAP,
         "notes": [

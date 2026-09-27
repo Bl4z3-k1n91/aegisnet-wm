@@ -1,0 +1,54 @@
+{
+  "model_release": "aegis-binary-v5-authority-challenger",
+  "model_type": "binary_present_attack_detector_authority_challenger",
+  "evidence_status": "real_hybrid_current_state_hard_negative",
+  "trained_at": "2026-09-27T06:24:08.224340+00:00",
+  "features": [
+    "flow_count",
+    "packet_count",
+    "byte_count",
+    "unique_src_ips",
+    "unique_dst_ips",
+    "unique_dst_ports",
+    "new_dst_hosts",
+    "new_dst_ports",
+    "tcp_flow_count",
+    "syn_count",
+    "ack_count",
+    "rst_count",
+    "fin_count",
+    "psh_count",
+    "urg_count",
+    "syn_only_count",
+    "syn_ack_ratio",
+    "rst_ratio",
+    "max_host_fanout",
+    "max_port_fanout",
+    "port_entropy",
+    "sequential_port_score",
+    "east_west_flows",
+    "north_south_flows",
+    "iat_mean_ms",
+    "iat_std_ms",
+    "iat_cv",
+    "flow_duration_mean_ms",
+    "flow_duration_p95_ms"
+  ],
+  "classes": [
+    "BENIGN",
+    "ATTACK"
+  ],
+  "attack_probability_threshold": 0.2800000000000001,
+  "ensemble_weights": {
+    "logistic": 0.0,
+    "forest": 0.7,
+    "extra": 0.3
+  },
+  "threshold_calibration": "run-disjoint EVE development validation; final acceptance campaign excluded",
+  "data_sources": [
+    "genis-temporal-v1",
+    "eve-binary-dev-v1"
+  ],
+  "alert_authority": false,
+  "promotion_eligible": false
+}

@@ -43,8 +43,10 @@ def snapshot() -> dict[str, Any]:
         try:
             connection = sqlite3.connect(f"file:{db_path.as_posix()}?mode=ro", uri=True, timeout=2)
             try:
-                db_detail = str(connection.execute("PRAGMA quick_check").fetchone()[0])
-                db_ok = db_detail.lower() == "ok"
+                connection.execute("PRAGMA query_only=ON")
+                probe = connection.execute("SELECT 1").fetchone()
+                db_ok = bool(probe and int(probe[0]) == 1)
+                db_detail = "readable"
             finally:
                 connection.close()
         except Exception as exc:
@@ -64,7 +66,11 @@ def snapshot() -> dict[str, Any]:
             "world_model": analysis.get("world_model"),
             "eve_shadow_calibration": analysis.get("eve_shadow_calibration"),
         },
-        "database": {"healthy": db_ok, "quick_check": db_detail},
+        "database": {
+            "healthy": db_ok,
+            "live_probe": db_detail,
+            "note": "full PRAGMA quick_check is performed by production_readiness.py, not on every health probe",
+        },
         "advisory_gate": {
             "status": advisory_guard.get("status"),
             "eligible": advisory_guard.get("advisory_eligible"),

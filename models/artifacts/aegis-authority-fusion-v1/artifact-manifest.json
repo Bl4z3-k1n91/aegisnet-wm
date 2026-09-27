@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-27T05:13:56.725701+00:00",
+  "artifact": "aegis-authority-fusion-v1",
+  "file_count": 1,
+  "directory_sha256": "fa7711f3abed0e32feeaa00772975c6d975f43d244f95b26c6476620c5ae0cd6",
+  "files": {
+    "fusion.json": {
+      "sha256": "7278444cbd920cc4d424fb06e1cd493e2fd86c1ed114093291fbc1a89e8c0c98",
+      "size": 789
+    }
+  }
+}

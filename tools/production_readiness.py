@@ -84,11 +84,19 @@ def main() -> int:
     }
 
     binary_metadata = jload(ROOT / policy["binary_detector_challenger"] / "metadata.json") or {}
-    binary_test = jload(ROOT / "outputs" / "binary-v3-eve-test-acceptance.json") or {}
+    acceptance_path = ROOT / str(policy.get("authority_acceptance_report") or "outputs/authority-acceptance.json")
+    binary_test = jload(acceptance_path) or {}
+    expected_campaign = policy.get("authority_acceptance_campaign")
+    acceptance_matches = (
+        binary_test.get("artifact") == binary_metadata.get("model_release")
+        and binary_test.get("campaign_id") == expected_campaign
+    )
     checks["binary_authority_acceptance"] = {
-        "pass": bool(binary_test.get("promotion_evidence_pass")),
+        "pass": bool(binary_test.get("promotion_evidence_pass")) and acceptance_matches,
         "artifact": binary_metadata.get("model_release"),
         "authority_enabled": bool(policy.get("current_detector_authority_enabled", False)),
+        "acceptance_report": str(acceptance_path),
+        "campaign_matches": acceptance_matches,
         "acceptance": binary_test,
     }
 

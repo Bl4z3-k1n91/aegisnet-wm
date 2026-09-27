@@ -1,0 +1,39 @@
+{
+  "local_validation_operating_point": {
+    "threshold": 0.060000000000000005,
+    "recall": 1.0,
+    "fpr": 0.0,
+    "precision": 1.0,
+    "accuracy": 1.0,
+    "attack_samples": 12,
+    "benign_samples": 30
+  },
+  "public_validation_at_local_threshold": {
+    "threshold": 0.060000000000000005,
+    "recall": 0.6993865030674846,
+    "fpr": 0.009283819628647215,
+    "precision": 0.8746803069053708,
+    "accuracy": 0.9660135252297555,
+    "attack_samples": 489,
+    "benign_samples": 5278
+  },
+  "local_eve_test": {
+    "threshold": 0.060000000000000005,
+    "recall": 1.0,
+    "fpr": 0.0,
+    "precision": 1.0,
+    "accuracy": 1.0,
+    "attack_samples": 12,
+    "benign_samples": 42
+  },
+  "public_genis_test": {
+    "threshold": 0.060000000000000005,
+    "recall": 0.9920948616600791,
+    "fpr": 0.00786862812179268,
+    "precision": 0.8451178451178452,
+    "accuracy": 0.9921298573536645,
+    "attack_samples": 253,
+    "benign_samples": 5846
+  },
+  "promotion_eligible": false
+}

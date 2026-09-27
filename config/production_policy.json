@@ -2,7 +2,9 @@
   "schema_version": 1,
   "current_detector_artifact": "models/artifacts/aegis-current-v3-stage",
   "current_detector_authority_enabled": false,
-  "binary_detector_challenger": "models/artifacts/aegis-binary-v3-challenger",
+  "binary_detector_challenger": "models/artifacts/aegis-binary-v6-temporal-authority",
+  "authority_acceptance_campaign": "authority-acceptance-v2",
+  "authority_acceptance_report": "outputs/authority-acceptance-v2.json",
   "stage_detector_challenger": "models/artifacts/aegis-current-v3-stage",
   "model_registry": "config/model_registry.json",
   "world_model_artifact": "models/artifacts/genis-world-v1",
@@ -33,5 +35,19 @@
     "minimum_history_fill_ratio": 1.0,
     "require_telemetry_healthy": true,
     "require_in_domain": true
+  },
+  "authority_acceptance": {
+    "min_negative_windows": 750,
+    "min_attack_windows": 100,
+    "min_attack_phases": 30,
+    "min_attack_runs": 15,
+    "max_raw_window_fpr": 0.03,
+    "max_confirmed_fpr": 0.01,
+    "min_window_recall": 0.90,
+    "max_false_alerts_per_hour": 0.10,
+    "min_attack_phase_detection": 0.90,
+    "min_hard_negative_windows": 500,
+    "max_hard_negative_raw_fpr": 0.01,
+    "max_hard_negative_confirmed_fpr": 0.005
   }
 }

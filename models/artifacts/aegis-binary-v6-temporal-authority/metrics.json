@@ -1,0 +1,12 @@
+{
+  "validation_operating_point": {
+    "threshold": 0.6699999999999999,
+    "recall": 1.0,
+    "fpr": 0.0041841004184100415,
+    "precision": 0.9375,
+    "attack_sequences": 15,
+    "benign_sequences": 239
+  },
+  "train_sequences": 885,
+  "validation_sequences": 254
+}
