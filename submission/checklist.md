@@ -19,5 +19,5 @@
 - [x] Rendered architecture PDF verified at 2 pages.
 - [x] Final PPTX verified at 5 slides.
 - [x] Final MP4 rendered and verified at 95.967 seconds.
-- [ ] Model pack uploaded to GitHub Release and download/hash documented.
-- [ ] Final compliance audit PASS from frozen git commit.
+- [x] Deterministic model pack uploaded to private GitHub Release; SHA-256 documented in `submission/model-release.json`.
+- [x] Final competition compliance audit PASS with 69/69 regression tests.

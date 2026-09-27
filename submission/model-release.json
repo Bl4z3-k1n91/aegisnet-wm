@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "release_tag": "aegisnet-model-pack-v1",
+  "release_name": "AEGISNET-WM Reproducible Model Pack v1",
+  "repository": "Bl4z3-k1n91/aegisnet-wm",
+  "repository_visibility": "PRIVATE",
+  "source_commit": "5bc1fea6a5648016fbbbb308a0f41df532611d65",
+  "asset": "aegisnet-model-pack-v1.zip",
+  "asset_bytes": 10588685,
+  "asset_sha256": "b67bbec956d840b5043235603c37f133147f0786a416b3d0d539d54abd485ee2",
+  "deterministic_build_check": {
+    "build_1_sha256": "b67bbec956d840b5043235603c37f133147f0786a416b3d0d539d54abd485ee2",
+    "build_2_sha256": "b67bbec956d840b5043235603c37f133147f0786a416b3d0d539d54abd485ee2",
+    "byte_identical": true
+  },
+  "contents": [
+    "genis-world-v1",
+    "genis-next-stage-v1",
+    "eve-shadow-calibration-v1",
+    "aegis-binary-v6-temporal-authority",
+    "genis-open-world-v1",
+    "ctu13-open-world-v1",
+    "cicids2017-open-world-v1",
+    "config/world_model_training.json"
+  ],
+  "authority_note": "Automated attack authority remains disabled until the locked local acceptance-volume and quality gates pass."
+}
