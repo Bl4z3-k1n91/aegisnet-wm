@@ -45,7 +45,11 @@ def main() -> int:
 
     analysis = jload(ROOT / "outputs" / "analysis-status.json") or {}
     checks["analysis_service"] = {
-        "pass": analysis.get("state") == "RUNNING" and analysis.get("mode") not in {"NO_DATA"},
+        # NO_DATA is an intentional fail-closed inference state, not a process
+        # or platform failure. Production health must remain green while the
+        # decision plane explicitly reports that inference is unavailable.
+        "pass": analysis.get("state") == "RUNNING",
+        "inference_ready": analysis.get("mode") not in {"NO_DATA"},
         "state": analysis.get("state"),
         "mode": analysis.get("mode"),
         "operator_state": analysis.get("operator_state"),

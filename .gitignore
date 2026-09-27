@@ -6,6 +6,7 @@ __pycache__/
 outputs/
 backups/
 releases/
+dist/
 presentation_tmp/
 eve/*.tgz
 dataset/public/

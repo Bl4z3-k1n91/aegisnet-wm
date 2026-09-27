@@ -10,3 +10,8 @@
 *.pt binary
 *.joblib binary
 *.npz binary
+*.pcap binary
+*.pcapng binary
+*.pptx binary
+*.pdf binary
+*.mp4 binary

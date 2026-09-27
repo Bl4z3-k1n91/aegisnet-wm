@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "production_advisory_world_model": "genis-world-v1",
+  "training_script": "models/world_model/train.py",
+  "dataset_builder": "models/world_model/genis_dataset.py",
+  "data_release": "genis-temporal-v1",
+  "state_window_seconds": 10,
+  "history_steps": 6,
+  "history_seconds": 60,
+  "forecast_horizons_steps": [1, 3, 6],
+  "forecast_horizons_seconds": [10, 30, 60],
+  "latent_dim": 64,
+  "feature_transform": "log1p",
+  "seed": 42,
+  "transition_sequence_weight": 6.0,
+  "onset_sequence_weight": 3.0,
+  "split_rule": "scenario-disjoint train/validation/test; no overlapping windows from one run cross splits",
+  "benchmark_rule": "logistic baseline uses the same current-state features and future targets; world model receives six sequential states",
+  "runtime_authority": "advisory only until local acceptance gates pass",
+  "notes": [
+    "Exact epochs and learned metrics are persisted inside the artifact metadata/metrics files.",
+    "Public datasets are never silently mixed into the locked EVE authority acceptance campaign.",
+    "Packet-level PCAP evidence is exposed in the offline competition path; benchmarked genis-world-v1 remains the learned flow-temporal core because GeNIS supplies the published flow representation."
+  ]
+}

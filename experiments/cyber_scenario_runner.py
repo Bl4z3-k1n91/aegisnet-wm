@@ -40,6 +40,7 @@ SCENARIOS = (
     "recon-ddos",
     "recon-ddos-medium",
     "recon-ddos-high",
+    "full-kill-chain",
     "benign-soak",
 )
 
@@ -171,6 +172,47 @@ def initial_access_commands(shell: EndpointShell) -> tuple[Callable[[], None], C
     )
 
 
+def lateral_movement_commands(shell: EndpointShell) -> tuple[Callable[[], None], Callable[[], None]]:
+    """Generate bounded east-west remote-service connection patterns only."""
+
+    command = (
+        "while true; do for p in 22 445 3389; do "
+        "echo x | nc -w 1 10.20.10.10 $p >/dev/null 2>&1; "
+        "echo x | nc -w 1 10.2.10.10 $p >/dev/null 2>&1; "
+        "sleep 0.25; done; sleep 1; done"
+    )
+    return (
+        lambda: shell.start_background("SERVICE-HUB", "lateral", command),
+        lambda: shell.stop_background("SERVICE-HUB", "lateral"),
+    )
+
+
+def c2_beacon_commands(shell: EndpointShell) -> tuple[Callable[[], None], Callable[[], None]]:
+    """Generate periodic small fixed-destination beacon traffic."""
+
+    command = (
+        "while true; do echo aegis-beacon | nc -u -w 1 10.2.10.10 8081 "
+        ">/dev/null 2>&1; sleep 2; done"
+    )
+    return (
+        lambda: shell.start_background("APP-DC", "c2-beacon", command),
+        lambda: shell.stop_background("APP-DC", "c2-beacon"),
+    )
+
+
+def exfiltration_like_commands(shell: EndpointShell) -> tuple[Callable[[], None], Callable[[], None]]:
+    """Generate bounded zero-filled transfer patterns; no real data is moved."""
+
+    command = (
+        "while true; do dd if=/dev/zero bs=1024 count=32 2>/dev/null | "
+        "nc -u -w 1 10.2.10.10 9001 >/dev/null 2>&1; sleep 1.5; done"
+    )
+    return (
+        lambda: shell.start_background("APP-DC", "exfil-like", command),
+        lambda: shell.stop_background("APP-DC", "exfil-like"),
+    )
+
+
 def ddos_commands(
     shell: EndpointShell,
     severity: str = "low",
@@ -218,6 +260,7 @@ def run(args: argparse.Namespace) -> int:
         "baseline_seconds": args.baseline_seconds,
         "recon_seconds": args.recon_seconds,
         "attack_seconds": args.attack_seconds,
+        "stage_seconds": args.stage_seconds,
         "recovery_seconds": args.recovery_seconds,
         "soak_seconds": args.soak_seconds,
         "traffic_profile": args.traffic_profile,
@@ -266,26 +309,98 @@ def run(args: argparse.Namespace) -> int:
                 stop=recon_stop,
                 details={"target": FIXED_TARGET, "ports": "20-80"},
             )
-            if args.scenario == "recon-initial-access":
+            if args.scenario == "full-kill-chain":
+                attack_start, attack_stop = initial_access_commands(shell)
+                record_phase(
+                    store,
+                    run_id,
+                    "initial-access",
+                    "INITIAL_ACCESS_PATTERN",
+                    args.stage_seconds,
+                    start=attack_start,
+                    stop=attack_stop,
+                    details={"target": FIXED_TARGET, "port": 22, "pattern": "repeated-connect"},
+                )
+                lateral_start, lateral_stop = lateral_movement_commands(shell)
+                record_phase(
+                    store,
+                    run_id,
+                    "lateral-movement",
+                    "LATERAL_MOVEMENT",
+                    args.stage_seconds,
+                    start=lateral_start,
+                    stop=lateral_stop,
+                    details={
+                        "sources": ["SERVICE-HUB"],
+                        "targets": ["APP-DC", "CLIENT-BR2"],
+                        "ports": [22, 445, 3389],
+                        "bounded": True,
+                    },
+                )
+                c2_start, c2_stop = c2_beacon_commands(shell)
+                record_phase(
+                    store,
+                    run_id,
+                    "command-control",
+                    "C2_BEACON_PATTERN",
+                    args.stage_seconds,
+                    start=c2_start,
+                    stop=c2_stop,
+                    details={
+                        "source": "APP-DC",
+                        "target": "CLIENT-BR2",
+                        "port": 8081,
+                        "period_seconds": 2,
+                        "bounded": True,
+                    },
+                )
+                exfil_start, exfil_stop = exfiltration_like_commands(shell)
+                record_phase(
+                    store,
+                    run_id,
+                    "exfiltration-like",
+                    "EXFILTRATION_LIKE",
+                    args.stage_seconds,
+                    start=exfil_start,
+                    stop=exfil_stop,
+                    details={
+                        "source": "APP-DC",
+                        "target": "CLIENT-BR2",
+                        "port": 9001,
+                        "payload": "zero-filled synthetic only",
+                        "bounded": True,
+                    },
+                )
+            elif args.scenario == "recon-initial-access":
                 attack_start, attack_stop = initial_access_commands(shell)
                 label = "INITIAL_ACCESS_PATTERN"
                 details = {"target": FIXED_TARGET, "port": 22, "pattern": "repeated-connect"}
+                record_phase(
+                    store,
+                    run_id,
+                    "attack",
+                    label,
+                    args.attack_seconds,
+                    start=attack_start,
+                    stop=attack_stop,
+                    details=details,
+                )
             else:
                 severity = (
                     "medium" if args.scenario == "recon-ddos-medium"
                     else ("high" if args.scenario == "recon-ddos-high" else "low")
                 )
                 attack_start, attack_stop, label, details = ddos_commands(shell, severity)
-            record_phase(
-                store,
-                run_id,
-                "attack",
-                label,
-                args.attack_seconds,
-                start=attack_start,
-                stop=attack_stop,
-                details=details,
-            )
+                record_phase(
+                    store,
+                    run_id,
+                    "attack",
+                    label,
+                    args.attack_seconds,
+                    start=attack_start,
+                    stop=attack_stop,
+                    details=details,
+                )
             record_phase(store, run_id, "recovery", "BENIGN", args.recovery_seconds)
         store.finish_run(run_id, "COMPLETED")
     except BaseException as exc:
@@ -327,6 +442,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--baseline-seconds", type=float, default=60)
     parser.add_argument("--recon-seconds", type=float, default=60)
     parser.add_argument("--attack-seconds", type=float, default=60)
+    parser.add_argument("--stage-seconds", type=float, default=45)
     parser.add_argument("--recovery-seconds", type=float, default=60)
     parser.add_argument("--soak-seconds", type=float, default=900)
     parser.add_argument("--traffic-profile", choices=("ping", "bulk", "business", "voice", "mixed"), default="mixed")
@@ -343,6 +459,7 @@ def parse_args() -> argparse.Namespace:
         args.baseline_seconds,
         args.recon_seconds,
         args.attack_seconds,
+        args.stage_seconds,
         args.recovery_seconds,
         args.soak_seconds,
         args.window_seconds,

@@ -1,0 +1,23 @@
+# SIH 26153 submission checklist
+
+- [x] Private source repository prepared for evaluator access.
+- [x] README with setup, live mode, offline PCAP/CSV mode and reproducibility commands.
+- [x] Learned temporal world model with +10/+30/+60 rollout.
+- [x] Flow-level features.
+- [x] Packet-level PCAP features.
+- [x] Offline PCAP/CSV UI.
+- [x] MITRE stage mapping.
+- [x] Per-prediction feature attribution.
+- [x] Same-feature logistic-regression benchmark.
+- [x] Bounded full-kill-chain lab scenario.
+- [x] Reproducible training config.
+- [x] Model-weight release packager + SHA-256.
+- [x] Open-source license.
+- [x] Architecture document source (max 2 pages when rendered).
+- [x] Five-slide presentation source.
+- [x] Two-minute demo script/storyboard.
+- [x] Rendered architecture PDF verified at 2 pages.
+- [x] Final PPTX verified at 5 slides.
+- [x] Final MP4 rendered and verified at 95.967 seconds.
+- [ ] Model pack uploaded to GitHub Release and download/hash documented.
+- [ ] Final compliance audit PASS from frozen git commit.

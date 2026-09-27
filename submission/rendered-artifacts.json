@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "verification": "rendered and visually inspected in the submission artifact environment",
+  "artifacts": [
+    {
+      "name": "AEGISNET_WM_Architecture_2Page.docx",
+      "bytes": 40827,
+      "sha256": "b7b8f09ec00e125f899827a5836346950bbbce1977307b7f7ff6000f3b22a672"
+    },
+    {
+      "name": "AEGISNET_WM_Architecture_2Page.pdf",
+      "bytes": 79198,
+      "sha256": "3351289a21379c2fd06bea4ccb11379bb6f591207b3993731367c6bdeefee3bb",
+      "pages": 2,
+      "limit_pages": 2
+    },
+    {
+      "name": "AEGISNET_WM_Technical_Presentation_5Slides.pptx",
+      "bytes": 44756,
+      "sha256": "64a212a597cac6c96e2ee985413b4a6dff3f55e1b718a6665d5096e1c1511afb",
+      "slides": 5,
+      "limit_slides": 5
+    },
+    {
+      "name": "AEGISNET_WM_Technical_Presentation_5Slides.pdf",
+      "bytes": 266653,
+      "sha256": "cb5c75e2bdbc970d4dc86d05c130a3a8d42640e3483046a8563459233df7434f",
+      "pages": 5
+    },
+    {
+      "name": "AEGISNET_WM_Demo_96s.mp4",
+      "bytes": 1011180,
+      "sha256": "2b23eb76ded782e582569b85e7527f6aeba0cb164a28f202cba880c8fd8fcd91",
+      "duration_seconds": 95.967,
+      "limit_seconds": 120
+    }
+  ]
+}
